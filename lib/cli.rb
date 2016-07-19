@@ -16,20 +16,54 @@ class CLI
     input = nil
     until input == "exit"
       puts ""
+      puts "What would you like to do?"
+      puts "1. Check your type against others"
+      puts "2. Check your opponent's type for weaknesses"
+      input = gets.strip
+      if input == "1"
+        your_type
+      elsif input == "2"
+        opponent_type
+      else
+        puts "Invalid option. Let's try again..."
+      end      
+    end
+  end
+
+  def your_type
+    puts "What type is your Pokemon? Please select 1-18 or type exit"
+    Type.list_types
+    puts ""
+    input = gets.strip
+    # avoid these pokemon. eg if fire, avoid water type pokemon
+    puts "#{Type.all[input.to_i - 1].name.upcase} IS STRONGEST AGAINST THE FOLLOWING TYPE(S):"
+    Type.all[input.to_i - 1].super_effective.each_with_index {|other_type, index| puts "#{index+1}. #{other_type.name}"}    
+    binding.pry
+    # your pokemon is strong against. eg if water, use fire type pokemon
+  end
+
+
+
+
+  def opponent_type
+    input = nil
+    until input == "exit"
       puts "What type is your opponent? Please select 1-18 or type exit"
       Type.list_types
       puts ""
-      input = gets.strip.to_i - 1
-      @type = Type.all[input]
-      good_pokemon
-      good_moves
-      puts "-----------------------"
-      bad_pokemon
-      bad_moves
-      puts ""
-      puts "Would you like to check another type? Y/N."
-      input = gets.strip.downcase 
-      input = "exit" if input == "n"
+      input = gets.strip
+      if input != "exit"
+        @type = Type.all[input.to_i - 1]
+        good_pokemon
+        good_moves
+        puts "-----------------------"
+        bad_pokemon
+        bad_moves
+        puts ""
+        puts "Would you like to check another type? Y/N."
+        input = gets.strip.downcase 
+        input = "exit" if input == "n"
+      end
     end
   end
 
@@ -52,7 +86,7 @@ class CLI
     end
   end
 
-  def bad_pokemon #uses :super_affective
+  def bad_pokemon #uses :super_effective
     if @type.super_effective.count > 0
       puts ""
       puts "AVOID POKEMON OF THESE TYPE(S)"
