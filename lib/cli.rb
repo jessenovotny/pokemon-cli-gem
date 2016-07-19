@@ -2,7 +2,7 @@
 class CLI
   def call
     welcome
-    Scraper.new.make_types
+    Scraper.new.make_relationships
   end
 
   def welcome

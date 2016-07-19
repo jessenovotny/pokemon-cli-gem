@@ -1,6 +1,5 @@
 class Scraper
   def get_page
-    binding.pry
     page = Nokogiri::HTML(open("http://pokemondb.net/type"))
   end
 
@@ -12,13 +11,20 @@ class Scraper
     end
   end
 
-  def make_relationships all_types
+  def make_relationships
+    self.make_types
     # iterate over @@all Types and scrape each one's URL to create relationships
-    Types.all.each do |type|
+    Type.all.each do |type|
       page = Nokogiri::HTML(open("#{type.url}")).css(".colset .col")[0]
-      page.css("p").each.with_index(0) do |rel|
+      page.css("p").each_with_index do |rel, index|
+        binding.pry
         if rel.text.include?("moves are super-effective")
-          type.super_effective = Type.find_by_name(rel.text.strip.split[0])
+          binding.pry
+          page.css('div')[index].text.strip.split.each {|other_type| type.super_effective << Type.find_by_name(other_type) }
+          binding.pry
+        elsif rel.text.include?("moves are not very effective")
+          page.css('div')[index].text.strip.split.each {|other_type| type.not_very_effective << Type.find_by_name(other_type) }
+          
         end
       end
 
