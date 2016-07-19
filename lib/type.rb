@@ -1,6 +1,6 @@
 class Type
   attr_reader :name, :url
-  attr_accessor :super_effective, :not_very_effective, :no_effect, :zero_effect_on, :strong_against, :weak_against
+  attr_accessor :super_effective, :not_very_effective, :no_effect, :not_effected_by, :strong_against, :weak_against
 
   @@all = []
 
@@ -10,7 +10,7 @@ class Type
     @super_effective = []
     @not_very_effective = []
     @no_effect = [] #this type's moves have no effect on these
-    @zero_effect_on = [] #these type moves have zero effect on this type
+    @not_effected_by = [] #these type moves have zero effect on this type
     @strong_against = []
     @weak_against = []
     @@all << self
