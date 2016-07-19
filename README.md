@@ -1,15 +1,16 @@
 # Pokemon
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/pokemon`. To experiment with that code, run `bin/console` for an interactive prompt.
+Welcome to the Pokemon Battle Assistant! It's a complex world out there with lots of different exciting pokemon. When it comes to gym battles, becoming a Pokemon Master doesn't have to mean memorizing all 18 types with all of their defenses or weaknesses. Don't worry about wrapping your head around a complex matrix of attack and defense types. 
 
-TODO: Delete this and the text above, and describe your gem
+Simply initaite this Pokemon Battle Assistant, enter your opponent Pokemon's type and find out immediately, which Pokemon to use for the best defense and which moves they should have for the best offense!
+
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-```ruby
-gem 'pokemon'
+```
+ruby gem 'pokemon'
 ```
 
 And then execute:
@@ -22,7 +23,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Thanks for using the Pokemon Battle Assistant. Upon initialization, you will be greeted and presented a simple question, "What would you like to do?". 
+
+Option 1, "Check an opponent's type" is your best bet when preparing for a grueling match. Enter their type and find out immediately: 
+ - which Pokemon have the best defense (USE these Pokemon)
+ - which moves will provide the best offense (USE these attacks)
+ - which Pokemon are weak against your opponent (DO NOT use these Pokemon)
+ - which attacks will be useless against your opponent (DO NOT use these attacks)
 
 ## Development
 
@@ -32,7 +39,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/pokemon.
+Bug reports and pull requests are welcome on GitHub at https://github.com/jessenovotny/pokemon.
 
 
 ## License

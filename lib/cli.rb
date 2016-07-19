@@ -56,7 +56,8 @@ class CLI
         @type = Type.all[input.to_i - 1]
         good_pokemon
         good_moves
-        puts "-----------------------"
+        puts ""
+        puts "------------------------------"
         bad_pokemon
         bad_moves
         puts ""
@@ -85,7 +86,7 @@ class CLI
         @type = Type.all[input.to_i - 1]
         defense_use
         puts ""
-        puts "-----------------------"
+        puts "------------------------------"
         defense_dont_use
         puts ""
         puts "Would you like to check another type? Y/N."
@@ -113,7 +114,7 @@ class CLI
         @type = Type.all[input.to_i - 1]
         attack_use
         puts ""
-        puts "-----------------------"
+        puts "------------------------------"
         attack_dont_use
         puts ""
         puts "Would you like to check another type? Y/N."
@@ -125,6 +126,7 @@ class CLI
     end # until
   end
 
+  ### The following are helper methods for #defense_type ###
   def defense_use
     use = []
     @type.not_effected_by.each {|type| use << type if !use.include?(type)}
@@ -140,14 +142,11 @@ class CLI
     @type.weak_against.each_with_index {|move, index| puts "#{index +1}. #{move.name}"}
   end
 
-
-
+  ### The following are helper methods for #attack_type ###
   def attack_use
-    use = []
-    @type.super_effective.each {|type| use << type if !use.include?(type)}
     puts ""
     puts "#{@type.name.upcase} MOVES ARE POWERFUL AGAINST:"
-    use.each_with_index {|other_type, index| puts "#{index+1}. #{other_type.name}"}
+    @type.super_effective.each_with_index {|other_type, index| puts "#{index+1}. #{other_type.name}"}
   end
 
   def attack_dont_use
@@ -159,7 +158,8 @@ class CLI
     dont_use.each_with_index {|other_type, index| puts "#{index+1}. #{other_type.name}"}
   end
 
-  def good_pokemon #uses :not_very_effective AND :no_effect
+  ### The following are helper methods for #opponent_type ###
+  def good_pokemon # :not_very_effective AND :no_effect
     good_pokemon = []
     @type.not_very_effective.each {|pokemon| good_pokemon << pokemon}
     @type.no_effect.each {|pokemon| good_pokemon << pokemon if !good_pokemon.include?(pokemon)}
@@ -170,7 +170,7 @@ class CLI
     end
   end
 
-  def good_moves #uses :weak against
+  def good_moves # :weak against
     if @type.weak_against.count > 0
       puts ""
       puts "USE MOVES OF THESE TYPE(S)" 
@@ -178,7 +178,7 @@ class CLI
     end
   end
 
-  def bad_pokemon #uses :super_effective
+  def bad_pokemon # :super_effective
     if @type.super_effective.count > 0
       puts ""
       puts "AVOID POKEMON OF THESE TYPE(S)"
@@ -186,7 +186,7 @@ class CLI
     end
   end
 
-  def bad_moves # uses :zero_effect_on AND :strong_against
+  def bad_moves #  :not_effected_by AND :strong_against
     bad_moves = []
     @type.not_effected_by.each {|move| bad_moves << move}
     @type.strong_against.each {|move| bad_moves << move if !bad_moves.include?(move)}
