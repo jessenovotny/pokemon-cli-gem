@@ -2,6 +2,7 @@
 class CLI
   def call
     welcome
+    Scraper.new.make_types
   end
 
   def welcome
