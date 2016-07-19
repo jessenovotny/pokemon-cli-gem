@@ -5,8 +5,7 @@ class Type
   @@all = []
 
   def initialize name, url
-    @name = name
-    @@all << self
+    @name = name    
     @url = url
     @super_effective = []
     @not_very_effective = []
@@ -14,6 +13,7 @@ class Type
     @zero_effect_on = [] #these type moves have zero effect on this type
     @strong_against = []
     @weak_against = []
+    @@all << self
   end
 
   def self.find_by_name name
