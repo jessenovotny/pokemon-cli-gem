@@ -20,6 +20,13 @@ class Type
     self.all.detect{|type| type.name == name}
   end
 
+  def self.list_types
+    binding.pry
+    @@all.each_with_index do |type, index|
+      puts "#{index + 1}. #{type.name}"
+    end
+
+
   def self.all
     @@all
   end

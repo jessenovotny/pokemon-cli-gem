@@ -17,11 +17,8 @@ class Scraper
     Type.all.each do |type|
       page = Nokogiri::HTML(open("#{type.url}")).css(".colset .col")[0]
       page.css("p").each_with_index do |rel, index|
-        binding.pry
         if rel.text.include?("moves are super-effective")
-          binding.pry
           page.css('div')[index].text.strip.split.each {|other_type| type.super_effective << Type.find_by_name(other_type) }
-          binding.pry
         elsif rel.text.include?("moves are not very effective")
           page.css('div')[index].text.strip.split.each {|other_type| type.not_very_effective << Type.find_by_name(other_type) }
         elsif rel.text.include?("moves have no effect")
@@ -32,10 +29,8 @@ class Scraper
           page.css('div')[index].text.strip.split.each {|other_type| type.strong_against << Type.find_by_name(other_type) }
         elsif rel.text.include?("types are super-effective")
           page.css('div')[index].text.strip.split.each {|other_type| type.weak_against << Type.find_by_name(other_type) }
-          
-        end
-      end
-
-    end
+        end # if
+      end # each "p" with index
+    end # each type
   end
 end
