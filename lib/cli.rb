@@ -19,11 +19,17 @@ class CLI
       puts "What would you like to do?"
       puts "1. Check your type against others"
       puts "2. Check your opponent's type for weaknesses"
+      puts "3. Exit"
+      puts ""
       input = gets.strip
       if input == "1"
+        puts ""
         your_type
       elsif input == "2"
+        puts ""
         opponent_type
+      elsif input.downcase == "exit" || input == "3"
+        input = "exit"
       else
         puts "Invalid option. Let's try again..."
       end      
@@ -31,21 +37,63 @@ class CLI
   end
 
   def your_type
-    puts "What type is your Pokemon? Please select 1-18 or type exit"
-    Type.list_types
-    puts ""
-    input = gets.strip
-    if input != "exit"
-      @type = Type.all[input.to_i - 1]
-      use_against
-      puts "-----------------------"
-      dont_use_against
+    input = nil
+    until input == "exit"
+      puts "What type is your Pokemon? Please select 1-18 or type exit"
+      Type.list_types
       puts ""
-      puts "Would you like to check another type? Y/N."
-      input = gets.strip.downcase 
-      input = "exit" if input == "n"
-    end
+      input = gets.strip
+      until input == "exit" || input.to_i.between?(1,18)
+        puts "Innvalid entry. Please select a type or exit"
+        puts ""
+        input = gets.strip
+      end
+      if input != "exit"
+        @type = Type.all[input.to_i - 1]
+        use_against
+        puts ""
+        puts "-----------------------"
+        dont_use_against
+        puts ""
+        puts "Would you like to check another type? Y/N."
+        puts ""
+        input = gets.strip.downcase 
+        puts ""
+        input = "exit" if input == "n"
+      end
+    end # until
   end
+
+  def opponent_type
+    input = nil
+    until input == "exit"
+      puts "What type is your opponent? Please select 1-18 or type exit"
+      Type.list_types
+      puts ""
+      input = gets.strip
+      until input == "exit" || input.to_i.between?(1,18)
+        puts "Innvalid entry. Please select a type or exit"
+        puts ""
+        input = gets.strip
+      end
+      if input != "exit"
+        @type = Type.all[input.to_i - 1]
+        good_pokemon
+        good_moves
+        puts "-----------------------"
+        bad_pokemon
+        bad_moves
+        puts ""
+        puts "Would you like to check another type? Y/N."
+        puts ""
+        input = gets.strip.downcase 
+        puts ""
+        input = "exit" if input == "n"
+      end
+    end # until
+  end
+
+
 
   def use_against
     use = []
@@ -59,34 +107,12 @@ class CLI
 
   def dont_use_against
     dont_use = []
-    @type.not_very_effective.each {|type| use << type if !use.include?(type)}
-    @type.no_effect.each {|type| use << type if !use.include?(type)}
-    @type.weak_against.each {|type| use << type if !use.include?(type)}
+    @type.not_very_effective.each {|type| dont_use << type if !dont_use.include?(type)}
+    @type.no_effect.each {|type| dont_use << type if !dont_use.include?(type)}
+    @type.weak_against.each {|type| dont_use << type if !dont_use.include?(type)}
     puts ""
     puts "DO NOT USE #{@type.name.upcase} AGAINST:"
-  end
-
-
-  def opponent_type
-    input = nil
-    until input == "exit"
-      puts "What type is your opponent? Please select 1-18 or type exit"
-      Type.list_types
-      puts ""
-      input = gets.strip
-      if input != "exit"
-        @type = Type.all[input.to_i - 1]
-        good_pokemon
-        good_moves
-        puts "-----------------------"
-        bad_pokemon
-        bad_moves
-        puts ""
-        puts "Would you like to check another type? Y/N."
-        input = gets.strip.downcase 
-        input = "exit" if input == "n"
-      end
-    end
+    dont_use.each_with_index {|other_type, index| puts "#{index+1}. #{other_type.name}"}
   end
 
   def good_pokemon #uses :not_very_effective AND :no_effect
@@ -129,6 +155,7 @@ class CLI
 
 
   def good_bye
+    puts ""
     puts "Go catch 'em all!"
   end
   
