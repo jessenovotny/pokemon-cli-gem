@@ -17,17 +17,21 @@ class CLI
     until input == "exit"
       puts ""
       puts "What would you like to do?"
-      puts "1. Check your type against others"
-      puts "2. Check your opponent's type for weaknesses"
-      puts "3. Exit"
+      puts "1. Check an opponent's type"
+      puts "2. Check your Pokemon's type"
+      puts "3. Check your move's type"
+      puts "4. Exit"
       puts ""
       input = gets.strip
       if input == "1"
         puts ""
-        your_type
+        opponent_type
       elsif input == "2"
         puts ""
-        opponent_type
+        # pokemon_type
+      elsif input == "3"
+        puts ""
+        move_type
       elsif input.downcase == "exit" || input == "3"
         input = "exit"
       else
@@ -36,7 +40,7 @@ class CLI
     end
   end
 
-  def your_type
+  def move_type
     input = nil
     until input == "exit"
       puts "What type is your Pokemon? Please select 1-18 or type exit"
@@ -159,7 +163,4 @@ class CLI
     puts "Go catch 'em all!"
   end
   
-
-
-    
 end

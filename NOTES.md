@@ -14,3 +14,5 @@ How to build a CLI gem:
 user provides their pokemon type or their opponents type.
 
 CLI returns a list of types that their pokemon are strong/weak against or best/worst types to use against their opponent.
+
+*** Make sure to change #find_by_name to #find_or_create_by_name
