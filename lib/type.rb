@@ -21,10 +21,10 @@ class Type
   end
 
   def self.list_types
-    binding.pry
     @@all.each_with_index do |type, index|
       puts "#{index + 1}. #{type.name}"
     end
+  end
 
 
   def self.all
