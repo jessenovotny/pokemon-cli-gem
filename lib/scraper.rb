@@ -17,12 +17,13 @@ class Scraper
     Type.all.each do |type|
       page = Nokogiri::HTML(open("#{type.url}")).css(".colset .col")[0]
       page.css("p").each_with_index do |rel, index|
-        
-
+      
         if rel.text.include?("moves are super-effective")
           page.css('div')[index].text.strip.split.each do |other_type| 
+            binding.pry
             type.super_effective << Type.find_by_name(other_type)
             Type.find_by_name(other_type).weak_against << type
+            binding.pry
           end
         
 

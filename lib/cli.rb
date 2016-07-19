@@ -9,7 +9,7 @@ class CLI
 
   def welcome
     puts "Welcome to the Pokemon Battle Assistant"
-    puts "Do you have what it takes to be a Pokemon Master?"
+    puts "Loading pokemon types..."
   end
 
   def battle_assist
@@ -62,7 +62,7 @@ class CLI
 
   def bad_moves # uses :zero_effect_on and :strong_against
     bad_moves = []
-    @type.zero_effect_on.each {|move| bad_moves << move}
+    @type.not_effected_by.each {|move| bad_moves << move}
     @type.strong_against.each {|move| bad_moves << move if !bad_moves.include?(move)}
     if bad_moves.count > 0
       puts ""
