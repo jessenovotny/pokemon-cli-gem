@@ -9,7 +9,7 @@ class CLI
 
   def welcome
     puts "Welcome to the Pokemon Battle Assistant"
-    puts "Loading pokemon types..."
+    puts "Loading Type Database..."
   end
 
   def battle_assist
@@ -28,7 +28,7 @@ class CLI
         opponent_type
       elsif input == "2"
         puts ""
-        # pokemon_type
+        defense_type
       elsif input == "3"
         puts ""
         attack_type
@@ -83,10 +83,10 @@ class CLI
       end
       if input != "exit"
         @type = Type.all[input.to_i - 1]
-        use_against
+        defense_use
         puts ""
         puts "-----------------------"
-        dont_use_against
+        defense_dont_use
         puts ""
         puts "Would you like to check another type? Y/N."
         puts ""
@@ -111,10 +111,10 @@ class CLI
       end
       if input != "exit"
         @type = Type.all[input.to_i - 1]
-        use_attack
+        attack_use
         puts ""
         puts "-----------------------"
-        dont_use_attack
+        attack_dont_use
         puts ""
         puts "Would you like to check another type? Y/N."
         puts ""
@@ -125,26 +125,37 @@ class CLI
     end # until
   end
 
-
-
-
-  def use_attack
+  def defense_use
     use = []
-    @type.super_effective.each {|type| use << type if !use.include?(type)}
     @type.not_effected_by.each {|type| use << type if !use.include?(type)}
     @type.strong_against.each {|type| use << type if !use.include?(type)}
     puts ""
-    puts "USE #{@type.name.upcase} AGAINST :"
+    puts "#{@type.name.upcase} POKEMON ARE RESISTANT TO:"
     use.each_with_index {|other_type, index| puts "#{index+1}. #{other_type.name}"}
   end
 
-  def dont_use_attack
+  def defense_dont_use
+    puts ""
+    puts "#{@type.name.upcase} POKEMON ARE WEAK AGAINST:" 
+    @type.weak_against.each_with_index {|move, index| puts "#{index +1}. #{move.name}"}
+  end
+
+
+
+  def attack_use
+    use = []
+    @type.super_effective.each {|type| use << type if !use.include?(type)}
+    puts ""
+    puts "#{@type.name.upcase} MOVES ARE POWERFUL AGAINST:"
+    use.each_with_index {|other_type, index| puts "#{index+1}. #{other_type.name}"}
+  end
+
+  def attack_dont_use
     dont_use = []
     @type.not_very_effective.each {|type| dont_use << type if !dont_use.include?(type)}
     @type.no_effect.each {|type| dont_use << type if !dont_use.include?(type)}
-    @type.weak_against.each {|type| dont_use << type if !dont_use.include?(type)}
     puts ""
-    puts "DO NOT USE #{@type.name.upcase} AGAINST:"
+    puts "#{@type.name.upcase} MOVES ARE NOT EFFECTIVE AGAINST:"
     dont_use.each_with_index {|other_type, index| puts "#{index+1}. #{other_type.name}"}
   end
 
