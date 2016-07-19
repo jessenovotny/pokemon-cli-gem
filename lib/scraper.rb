@@ -24,6 +24,14 @@ class Scraper
           binding.pry
         elsif rel.text.include?("moves are not very effective")
           page.css('div')[index].text.strip.split.each {|other_type| type.not_very_effective << Type.find_by_name(other_type) }
+        elsif rel.text.include?("moves have no effect")
+          page.css('div')[index].text.strip.split.each {|other_type| type.no_effect << Type.find_by_name(other_type) }
+        elsif rel.text.include?("types have no effect")
+          page.css('div')[index].text.strip.split.each {|other_type| type.zero_effect_on << Type.find_by_name(other_type) }
+        elsif rel.text.include?("types are not very effective")
+          page.css('div')[index].text.strip.split.each {|other_type| type.strong_against << Type.find_by_name(other_type) }
+        elsif rel.text.include?("types are super-effective")
+          page.css('div')[index].text.strip.split.each {|other_type| type.weak_against << Type.find_by_name(other_type) }
           
         end
       end
