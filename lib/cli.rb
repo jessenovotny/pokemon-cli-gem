@@ -35,14 +35,36 @@ class CLI
     Type.list_types
     puts ""
     input = gets.strip
-    # avoid these pokemon. eg if fire, avoid water type pokemon
-    puts "#{Type.all[input.to_i - 1].name.upcase} IS STRONGEST AGAINST THE FOLLOWING TYPE(S):"
-    Type.all[input.to_i - 1].super_effective.each_with_index {|other_type, index| puts "#{index+1}. #{other_type.name}"}    
-    binding.pry
-    # your pokemon is strong against. eg if water, use fire type pokemon
+    if input != "exit"
+      @type = Type.all[input.to_i - 1]
+      use_against
+      puts "-----------------------"
+      dont_use_against
+      puts ""
+      puts "Would you like to check another type? Y/N."
+      input = gets.strip.downcase 
+      input = "exit" if input == "n"
+    end
   end
 
+  def use_against
+    use = []
+    @type.super_effective.each {|type| use << type if !use.include?(type)}
+    @type.not_effected_by.each {|type| use << type if !use.include?(type)}
+    @type.strong_against.each {|type| use << type if !use.include?(type)}
+    puts ""
+    puts "USE #{@type.name.upcase} AGAINST :"
+    use.each_with_index {|other_type, index| puts "#{index+1}. #{other_type.name}"}
+  end
 
+  def dont_use_against
+    dont_use = []
+    @type.not_very_effective.each {|type| use << type if !use.include?(type)}
+    @type.no_effect.each {|type| use << type if !use.include?(type)}
+    @type.weak_against.each {|type| use << type if !use.include?(type)}
+    puts ""
+    puts "DO NOT USE #{@type.name.upcase} AGAINST:"
+  end
 
 
   def opponent_type
@@ -67,7 +89,7 @@ class CLI
     end
   end
 
-  def good_pokemon #uses 
+  def good_pokemon #uses :not_very_effective AND :no_effect
     good_pokemon = []
     @type.not_very_effective.each {|pokemon| good_pokemon << pokemon}
     @type.no_effect.each {|pokemon| good_pokemon << pokemon if !good_pokemon.include?(pokemon)}
@@ -94,7 +116,7 @@ class CLI
     end
   end
 
-  def bad_moves # uses :zero_effect_on and :strong_against
+  def bad_moves # uses :zero_effect_on AND :strong_against
     bad_moves = []
     @type.not_effected_by.each {|move| bad_moves << move}
     @type.strong_against.each {|move| bad_moves << move if !bad_moves.include?(move)}
