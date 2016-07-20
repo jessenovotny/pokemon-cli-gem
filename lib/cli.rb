@@ -256,7 +256,10 @@ class CLI
 
   def good_bye
     puts ""
-    puts "Go catch 'em all!"
+    puts "  Thank you for using the Pokemon Battle Assistant!"
+    puts ""
+    puts "                  Go catch 'em all!"
+    puts ""
   end
   
 end
