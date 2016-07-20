@@ -23,13 +23,29 @@ Or install it yourself as:
 
 ## Usage
 
-Thanks for using the Pokemon Battle Assistant. Upon initialization, you will be greeted and presented a simple question, "What would you like to do?". 
+Thanks for using the Pokemon Battle Assistant. Upon initialization, you will be greeted and presented a simple question, "What would you like to do?"
 
-Option 1, "Check an opponent's type" is your best bet when preparing for a grueling match. Enter their type and find out immediately: 
- - which Pokemon have the best defense (USE these Pokemon)
- - which moves will provide the best offense (USE these attacks)
- - which Pokemon are weak against your opponent (DO NOT use these Pokemon)
- - which attacks will be useless against your opponent (DO NOT use these attacks)
+OPTION 1: "Check an opponent's type" is your best bet when preparing for a grueling match. 
+  Enter their type and find out: 
+   - which Pokemon have the best defense (USE these Pokemon)
+   - which moves will provide the best offense (USE these attacks)
+   - which Pokemon are weak against your opponent (DO NOT use these Pokemon)
+   - which attacks will be useless against your opponent (DO NOT use these attacks)
+
+OPTION 2: "Check your Defense" is used to see what types of moves your Pokemon is strong or weak against. 
+  Enter your Pokemon's type and find out:
+   - which types of moves have little or no effect on you (fight these types of Pokemon)
+   - which types of moves will deal the most damage to you (DO NOT fight these types of Pokemon)
+
+OPTION 3: "Check your Attack's type" is helpful for idenfitying which types of Pokemon are strong or weak against your offense. 
+  Enter the type of your Pokemon's attack and find out:
+   - which types of Pokemon are most vulnerable to your Pokemon's attack (fight these types of Pokemon)
+   - which types of Pokemon are most immune to your Pokemon's attack (DO NOT fight these types of Pokemon)
+
+It's that simple! 
+
+A true Pokemon Master will want to utilize this tool to it's full potential before any battle to take the upper hand and never be caught off guard. 
+
 
 ## Development
 
