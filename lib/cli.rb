@@ -8,8 +8,33 @@ class CLI
   end
 
   def welcome
-    puts "Welcome to the Pokemon Battle Assistant"
-    puts "Loading Type Database..."
+    puts ""
+    puts " ___________________________________________"
+    puts "|                                           |"
+    puts "|  Welcome to the Pokemon Battle Assistant  |"
+    puts "|___________________________________________|"
+    puts ""
+    puts "       ────────▄███████████▄────────"
+    puts "       ─────▄███▓▓▓▓▓▓▓▓▓▓▓███▄─────"
+    puts "       ────███▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███────"
+    puts "       ───██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██───"
+    puts "       ──██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██──"
+    puts "       ─██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██─"
+    puts "       ██▓▓▓▓▓▓▓▓▓███████▓▓▓▓▓▓▓▓▓██"
+    puts "       ██▓▓▓▓▓▓▓▓██░░░░░██▓▓▓▓▓▓▓▓██"
+    puts "       ██▓▓▓▓▓▓▓██░░███░░██▓▓▓▓▓▓▓██"
+    puts "       ███████████░░███░░███████████"
+    puts "       ██░░░░░░░██░░███░░██░░░░░░░██"
+    puts "       ██░░░░░░░░██░░░░░██░░░░░░░░██"
+    puts "       ██░░░░░░░░░███████░░░░░░░░░██"
+    puts "       ██░░░░░░░░░███████░░░░░░░░░██"
+    puts "       ──██░░░░░░░░░░░░░░░░░░░░░██──"
+    puts "       ───██░░░░░░░░░░░░░░░░░░░██───"
+    puts "       ────███░░░░░░░░░░░░░░░███────"
+    puts "       ─────▀███░░░░░░░░░░░███▀─────"
+    puts "       ────────▀███████████▀────────"
+    puts ""
+    puts "          Loading Type Database..."
   end
 
   def battle_assist
@@ -37,6 +62,7 @@ class CLI
       elsif input.downcase == "exit" || input == "4"
         input = "exit"
       else
+        puts ""
         puts "Invalid option. Let's try again..."
       end      
     end
@@ -52,7 +78,8 @@ class CLI
       input = gets.strip
       
       until input == "exit" || input.to_i.between?(1,18)
-        puts "Innvalid entry. Please select a type or exit"
+        puts ""
+        puts "Invalid entry. Please select a type or exit"
         puts ""
         input = gets.strip
       end
@@ -73,7 +100,6 @@ class CLI
         puts "Would you like to check another type? Y/N."
         puts ""
         input = gets.strip.downcase 
-        puts ""
         input = "exit" if input == "n"
       end
     end # until
@@ -89,7 +115,8 @@ class CLI
       input = gets.strip
       
       until input == "exit" || input.to_i.between?(1,18)
-        puts "Innvalid entry. Please select a type or exit"
+        puts ""
+        puts "Invalid entry. Please select a type or exit"
         puts ""
         input = gets.strip
       end
@@ -108,7 +135,6 @@ class CLI
         puts "Would you like to check another type? Y/N."
         puts ""
         input = gets.strip.downcase 
-        puts ""
         input = "exit" if input == "n"
       end
     end # until
@@ -124,7 +150,8 @@ class CLI
       input = gets.strip
     
       until input == "exit" || input.to_i.between?(1,18)
-        puts "Innvalid entry. Please select a type or exit"
+        puts ""
+        puts "Invalid entry. Please select a type or exit"
         puts ""
         input = gets.strip
       end
@@ -143,7 +170,6 @@ class CLI
         puts "Would you like to check another type? Y/N."
         puts ""
         input = gets.strip.downcase 
-        puts ""
         input = "exit" if input == "n"
       end
     end # until
