@@ -18,10 +18,8 @@ class Scraper
       page.css("p").each_with_index do |rel, index|
         
         if rel.text.include?("moves are super-effective")
-          page.css('div')[index].text.strip.split.each do |other_type| 
-            type.super_effective << Type.find_by_name(other_type) if !type.super_effective.include?(Type.find_by_name(other_type))
-            Type.find_by_name(other_type).weak_against << type if !Type.find_by_name(other_type).weak_against.include?(type)
-          end
+          super_effective(type, index, page)
+          
         
         elsif rel.text.include?("moves are not very effective")
           page.css('div')[index].text.strip.split.each do |other_type| 
@@ -56,4 +54,12 @@ class Scraper
       end # each "p" with index
     end # each type
   end # make_relationships
+
+  def super_effective type, index, page
+    page.css('div')[index].text.strip.split.each do |other_type| 
+      type.super_effective << Type.find_by_name(other_type) if !type.super_effective.include?(Type.find_by_name(other_type))
+      Type.find_by_name(other_type).weak_against << type if !Type.find_by_name(other_type).weak_against.include?(type)
+    end
+  end
+
 end
