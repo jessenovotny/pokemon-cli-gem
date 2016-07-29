@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
+# this shebang line allows ruby to interpret the file without explicitely telling it which language to interpret it with.
 
-require "./config/environment"
+require_relative "../config/environment"
 
 CLI.new.call 
