@@ -204,7 +204,7 @@ class CLI
   def attack_dont_use
     dont_use = []
     @type.not_very_effective.each {|type| dont_use << type if !dont_use.include?(type)}
-    @type.no_effect.each {|type| dont_use << type if !dont_use.include?(type)}
+    @type.no_effect_on.each {|type| dont_use << type if !dont_use.include?(type)}
     
     puts ""
     puts "#{@type.name.upcase} MOVES ARE NOT EFFECTIVE AGAINST:"
@@ -213,10 +213,10 @@ class CLI
 
   ### The following are helper methods for #opponent_type ###
   
-  def good_pokemon # :not_very_effective AND :no_effect
+  def good_pokemon # :not_very_effective AND :no_effect_on
     good_pokemon = []
     @type.not_very_effective.each {|pokemon| good_pokemon << pokemon}
-    @type.no_effect.each {|pokemon| good_pokemon << pokemon if !good_pokemon.include?(pokemon)}
+    @type.no_effect_on.each {|pokemon| good_pokemon << pokemon if !good_pokemon.include?(pokemon)}
     
     if good_pokemon.count > 0
       puts ""
