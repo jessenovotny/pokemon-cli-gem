@@ -47,8 +47,7 @@ end
   #   self.make_types
 
   #   Type.all.each do |type|
-  #     hash = {"#{type.name} moves are super-effective against:" => :super_effective , "moves are not very effective" => :not_very_effective}
-
+  
   #     page = Nokogiri::HTML(open("#{type.url}")).css(".colset .col")[0]
   #     page.css("p").each_with_index do |rel, index|
 
