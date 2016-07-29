@@ -22,7 +22,9 @@ class Scraper
         "These types are not very effective against #{type.name} Pokémon:" => :strong_against,
         "These types are super-effective against #{type.name} Pokémon:" => :weak_against
         }
+
       page = Nokogiri::HTML(open("#{type.url}")).css(".colset .col")[0]
+      
       page.css("p").each_with_index do |rel_string, index|
         rel_sym = hash[rel_string.text.strip]
         if rel_sym != nil
