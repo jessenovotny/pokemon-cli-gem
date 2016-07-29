@@ -38,7 +38,10 @@ class Scraper
   end
 end
 
-# Below is the original make_relationships before refactoring with #send. I struggled with a way to avoid such an arguous conditional block. Using #send is much more clean and concise! I felt it relevate to keep this for reference because such a small change made a HUGE impact in readability AND efficiency.
+# Below is the original make_relationships before refactoring with #send. 
+# I struggled with a way to avoid such an arguous conditional block. 
+# Using #send is much more clean and concise! 
+# I feel it relevate to keep this for reference because such a small change made a HUGE impact in readability AND efficiency.
 
 # def make_relationships
   #   self.make_types
